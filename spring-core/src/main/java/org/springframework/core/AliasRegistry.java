@@ -27,7 +27,7 @@ public interface AliasRegistry {
 
 	/**
 	 * Given a name, register an alias for it.
-	 * @param name the canonical name
+	 * @param name the canonical name  ¹æ·¶Ãû
 	 * @param alias the alias to be registered
 	 * @throws IllegalStateException if the alias is already in use
 	 * and may not be overridden

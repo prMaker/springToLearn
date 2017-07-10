@@ -38,6 +38,7 @@ import org.springframework.core.NamedThreadLocal;
  * @author Juergen Hoeller
  * @since 13.03.2003
  */
+/*performance cost Ö´ÐÐ´ú¼Û*/
 public abstract class AopContext {
 
 	/**

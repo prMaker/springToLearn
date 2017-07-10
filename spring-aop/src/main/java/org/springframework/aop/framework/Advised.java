@@ -35,6 +35,7 @@ import org.springframework.aop.TargetSource;
  * @since 13.03.2003
  * @see org.springframework.aop.framework.AdvisedSupport
  */
+/*obtained 获得*/
 public interface Advised extends TargetClassAware {
 
 	/**
@@ -80,6 +81,8 @@ public interface Advised extends TargetClassAware {
 	 * advised object invokes a method on {@code this}, no advice will be applied.
 	 * <p>Default is {@code false}, for optimal performance.
 	 */
+	/*设置方法中的this.调用是否可以执行、若可以 则需要设置该参数为true 默认false、for optimal performance 为了最佳的性能*/
+	/*设置是否暴露作为一个ThreadLocal 为回收通过aopContext.class*/
 	void setExposeProxy(boolean exposeProxy);
 
 	/**
@@ -90,6 +93,7 @@ public interface Advised extends TargetClassAware {
 	 * <p>Getting the proxy is analogous to an EJB calling {@code getEJBObject()}.
 	 * @see AopContext
 	 */
+	/*analogous 相似的*/
 	boolean isExposeProxy();
 
 	/**
@@ -100,6 +104,8 @@ public interface Advised extends TargetClassAware {
 	 * when building the actual advisor chain for proxy invocations.
 	 * @see org.springframework.aop.ClassFilter
 	 */
+	/*applicable 适当的、advisors 顾问*/
+	/*pre-filtered 预滤波*/
 	void setPreFiltered(boolean preFiltered);
 
 	/**
@@ -182,6 +188,8 @@ public interface Advised extends TargetClassAware {
 	 * @see #addAdvice(int, Advice)
 	 * @see org.springframework.aop.support.DefaultPointcutAdvisor
 	 */
+	/*alliance 结盟、同盟、联合  to the tail of 到尾部*/
+	/*appropriate 适当的、合适的 narrower 狭窄的 狭义的*/
 	void addAdvice(Advice advice) throws AopConfigException;
 
 	/**
@@ -221,6 +229,7 @@ public interface Advised extends TargetClassAware {
 	 * this returns the equivalent for the AOP proxy.
 	 * @return a string description of the proxy configuration
 	 */
+	/*equivalent 相等的、相当的、等效的*/
 	String toProxyConfigString();
 
 }
