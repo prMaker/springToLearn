@@ -83,6 +83,7 @@ public interface Advised extends TargetClassAware {
 	 */
 	/*设置方法中的this.调用是否可以执行、若可以 则需要设置该参数为true 默认false、for optimal performance 为了最佳的性能*/
 	/*设置是否暴露作为一个ThreadLocal 为回收通过aopContext.class*/
+	/*retrieval 收回*/
 	void setExposeProxy(boolean exposeProxy);
 
 	/**
