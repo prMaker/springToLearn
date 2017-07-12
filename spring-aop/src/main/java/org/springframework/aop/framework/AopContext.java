@@ -22,8 +22,9 @@ import org.springframework.core.NamedThreadLocal;
  * Class containing static methods used to obtain information about the current AOP invocation.
  *
  * <p>The {@code currentProxy()} method is usable if the AOP framework is configured to
- * expose the current proxy (not the default). It returns the AOP proxy in use. Target objects
- * or advice can use this to make advised calls, in the same way as {@code getEJBObject()}
+ * expose the current proxy (not the default). It returns the AOP proxy in use.
+ * XXX
+ * Target objects or advice can use this to make advised calls, in the same way as {@code getEJBObject()}
  * can be used in EJBs. They can also use it to find advice configuration.
  *
  * <p>Spring's AOP framework does not expose proxies by default, as there is a performance cost
@@ -39,6 +40,15 @@ import org.springframework.core.NamedThreadLocal;
  * @since 13.03.2003
  */
 /*performance cost 执行代价*/
+
+/**
+ * 类注释：
+ * 1.内部是线程唯一的、只能在同包中设置代理（设置代理和 代理配置的 exposeProxy 有关）
+ * 2.只有在 AOP环境下 才可以获取 currentProxy() 从而调用当前类的代理类中 AOP 的其他方法
+ * 注：
+ * （解决的问题：）一个类中 有两个AOP方法  怎么在一个AOP方法中访问 另一个的AOP方法
+ * （代价：） 每个线程 运行该方法时 多使用一个 ThreadLocal 变量、线程池时、使用完需关闭
+ */
 public abstract class AopContext {
 
 	/**
@@ -59,6 +69,11 @@ public abstract class AopContext {
 	 * method was invoked outside an AOP invocation context, or because the
 	 * AOP framework has not been configured to expose the proxy
 	 */
+	/*
+	* 获取当前代理的这个线程的 这个代理类
+	* 1.调用这个方法的方法 必须处于AOP环境下
+	* 2.AOP中的配置必须设置为EXPOSE_PROXY true TODO 查看当没有设置为true时 为什么没有该代理对象
+	* */
 	public static Object currentProxy() throws IllegalStateException {
 		Object proxy = currentProxy.get();
 		if (proxy == null) {
@@ -75,6 +90,7 @@ public abstract class AopContext {
 	 * @return the old proxy, which may be {@code null} if none was bound
 	 * @see #currentProxy()
 	 */
+	/*appropriate 适合的、适当的*/
 	static Object setCurrentProxy(Object proxy) {
 		Object old = currentProxy.get();
 		if (proxy != null) {

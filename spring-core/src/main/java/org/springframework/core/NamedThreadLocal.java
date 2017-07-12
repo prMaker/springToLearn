@@ -35,6 +35,7 @@ public class NamedThreadLocal<T> extends ThreadLocal<T> {
 	 * Create a new NamedThreadLocal with the given name.
 	 * @param name a descriptive name for this ThreadLocal
 	 */
+	/*descriptive ÃèÊöµÄ¡¢ĞğÊöµÄ*/
 	public NamedThreadLocal(String name) {
 		Assert.hasText(name, "Name must not be empty");
 		this.name = name;

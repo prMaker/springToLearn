@@ -28,6 +28,13 @@ import org.springframework.util.Assert;
  * @author Juergen Hoeller
  * @see AdvisedSupport
  */
+/*convenience 方便的、便利的 */
+
+/**
+ * 问题：
+ * consistent properties ?
+ *
+ */
 public class ProxyConfig implements Serializable {
 
 	/** use serialVersionUID from Spring 1.2 for interoperability */
@@ -36,8 +43,10 @@ public class ProxyConfig implements Serializable {
 
 	private boolean proxyTargetClass = false;
 
+	/*optimize 最优化、使尽可能有效*/
 	private boolean optimize = false;
 
+	/*opaque 不透明的、晦暗的*/
 	boolean opaque = false;
 
 	boolean exposeProxy = false;
