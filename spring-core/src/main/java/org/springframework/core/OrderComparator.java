@@ -27,9 +27,13 @@ import org.springframework.util.ObjectUtils;
  * {@link Comparator} implementation for {@link Ordered} objects, sorting
  * by order value ascending, respectively by priority descending.
  *
+ * ascending 升  respectively 分别 adv
+ *
  * <h3>Same Order Objects</h3>
  * <p>Objects that have the same order value will be sorted with arbitrary
  * ordering with respect to other objects with the same order value.
+ *
+ * arbitrary 随意的 adj
  *
  * <h3>Non-ordered Objects</h3>
  * <p>Any object that does not provide its own order value is implicitly
@@ -37,6 +41,7 @@ import org.springframework.util.ObjectUtils;
  * at the end of a sorted collection in arbitrary order with respect to
  * other objects with the same order value.
  *
+ * implicitly 隐含的
  * @author Juergen Hoeller
  * @author Sam Brannen
  * @since 07.04.2003

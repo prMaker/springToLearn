@@ -28,6 +28,7 @@ package org.springframework.core;
  * prioritized post-processors in a Spring
  * {@link org.springframework.context.ApplicationContext}.
  *
+ * {TODO SEE }
  * <p>Note: {@code PriorityOrdered} post-processor beans are initialized in
  * a special phase, ahead of other post-processor beans. This subtly
  * affects their autowiring behavior: they will only be autowired against
@@ -38,6 +39,7 @@ package org.springframework.core;
  * @see org.springframework.beans.factory.config.PropertyOverrideConfigurer
  * @see org.springframework.beans.factory.config.PropertyPlaceholderConfigurer
  */
+/*recognize 认识到 prioritize 按优先顺序的 phase 阶段、时期*/
 public interface PriorityOrdered extends Ordered {
 
 }

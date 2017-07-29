@@ -28,13 +28,10 @@ import org.springframework.util.Assert;
  * @author Juergen Hoeller
  * @see AdvisedSupport
  */
-/*convenience 方便的、便利的 */
-
-/**
- * 问题：
- * consistent properties ?
- *
- */
+/*convenience 方便的、便利的
+* consistent 一致的
+*
+* */
 public class ProxyConfig implements Serializable {
 
 	/** use serialVersionUID from Spring 1.2 for interoperability */
@@ -46,11 +43,16 @@ public class ProxyConfig implements Serializable {
 	/*optimize 最优化、使尽可能有效*/
 	private boolean optimize = false;
 
-	/*opaque 不透明的、晦暗的*/
+	/*opaque 不透明的、晦暗的 设置是否可以将代理的对象设置为 {@link Advised} 接口对象 */
 	boolean opaque = false;
 
+	/*true 用于解决 单一对象中有两个AOP 方法、且其中一个AOP方法调用另一个AOP方法，但不能使用THIS调用*/
 	boolean exposeProxy = false;
 
+	/*冻结*/
+	/**
+	 * 见{@linnk frozen}
+	 */
 	private boolean frozen = false;
 
 
@@ -61,11 +63,14 @@ public class ProxyConfig implements Serializable {
 	 * target class. If that target class is an interface, a JDK proxy will be
 	 * created for the given interface. If that target class is any other class,
 	 * a CGLIB proxy will be created for the given class.
+	 *
+	 * FIXME yuanweijie 从新理解
 	 * <p>Note: Depending on the configuration of the concrete proxy factory,
 	 * the proxy-target-class behavior will also be applied if no interfaces
 	 * have been specified (and no interface autodetection is activated).
 	 * @see org.springframework.aop.TargetSource#getTargetClass()
 	 */
+	/*specific adj、具体的、明确的 n 细节、特性   concrete 具体的、有形的、实在的*/
 	public void setProxyTargetClass(boolean proxyTargetClass) {
 		this.proxyTargetClass = proxyTargetClass;
 	}
@@ -87,7 +92,11 @@ public class ProxyConfig implements Serializable {
 	 * is disabled by default. An optimize value of "true" may be ignored
 	 * if other settings preclude optimization: for example, if "exposeProxy"
 	 * is set to "true" and that's not compatible with the optimization.
+	 * 例如：优化将会总是意味着一个代理创建成功后，{ FIXME 通知的改变将不会生效}
+	 * 优化设置在另一个优化之后设置便会被忽略
+	 * 例如：{FIXME 如果暴露代理设置为对 那么和最优化是不兼容的}
 	 */
+	/*aggressive 积极的 optimize 优化  tradeoff 折中，权衡 compatible 兼容*/
 	public void setOptimize(boolean optimize) {
 		this.optimize = optimize;
 	}
@@ -104,6 +113,7 @@ public class ProxyConfig implements Serializable {
 	 * from being cast to {@link Advised} to query proxy status.
 	 * <p>Default is "false", meaning that any AOP proxy can be cast to
 	 * {@link Advised}.
+	 * 设置 AOP 对象是否支持 可以转换为 {@link Advised} 接口 来查询AOP 代理状态
 	 */
 	public void setOpaque(boolean opaque) {
 		this.opaque = opaque;
@@ -120,8 +130,11 @@ public class ProxyConfig implements Serializable {
 	/**
 	 * Set whether the proxy should be exposed by the AOP framework as a
 	 * ThreadLocal for retrieval via the AopContext class. This is useful
+	 * 通过 {@link AopContext} 对象来回收
 	 * if an advised object needs to call another advised method on itself.
 	 * (If it uses {@code this}, the invocation will not be advised).
+	 * 如果用了 this 调用将不会被 通知
+	 * {TODO @see V V V V}
 	 * <p>Default is "false", in order to avoid unnecessary extra interception.
 	 * This means that no guarantees are provided that AopContext access will
 	 * work consistently within any method of the advised object.
@@ -143,6 +156,9 @@ public class ProxyConfig implements Serializable {
 	 * <p>When a config is frozen, no advice changes can be made. This is
 	 * useful for optimization, and useful when we don't want callers to
 	 * be able to manipulate configuration after casting to Advised.
+	 * 设置这个配置应该会被冻结
+	 * 当配置被冻结后，将不能再改变配置， 这对于最优化使有用的， 而且是有用的 当我们不想
+	 * 调用者能够操作配置 当强制转换为一个通知后！
 	 */
 	public void setFrozen(boolean frozen) {
 		this.frozen = frozen;

@@ -66,6 +66,7 @@ public interface Ordered {
 	 * @see #HIGHEST_PRECEDENCE
 	 * @see #LOWEST_PRECEDENCE
 	 */
+	/*interpret 解释 consequence 结果 analogous 相似的 arbitrary 随意的、任性的*/
 	int getOrder();
 
 }
