@@ -18,6 +18,7 @@ package org.springframework.beans.factory;
 
 import org.springframework.beans.BeansException;
 import org.springframework.core.ResolvableType;
+import org.springframework.core.env.Environment;
 
 /**
  * The root interface for accessing a Spring bean container.
@@ -65,26 +66,37 @@ import org.springframework.core.ResolvableType;
  * <p>Bean factory implementations should support the standard bean lifecycle interfaces
  * as far as possible. The full set of initialization methods and their standard order is:
  * <ol>
- * <li>BeanNameAware's {@code setBeanName}
- * <li>BeanClassLoaderAware's {@code setBeanClassLoader}
- * <li>BeanFactoryAware's {@code setBeanFactory}
- * <li>EnvironmentAware's {@code setEnvironment}
- * <li>EmbeddedValueResolverAware's {@code setEmbeddedValueResolver}
- * <li>ResourceLoaderAware's {@code setResourceLoader}
+ * <li>1.BeanNameAware's {@code setBeanName}
+ * <li>2.BeanClassLoaderAware's {@code setBeanClassLoader}
+ * <li>3.BeanFactoryAware's {@code setBeanFactory}
+ * <li>4.EnvironmentAware's {@code setEnvironment}
+ * <li>5.EmbeddedValueResolverAware's {@code setEmbeddedValueResolver}
+ * <li>6.ResourceLoaderAware's {@code setResourceLoader}
  * (only applicable when running in an application context)
- * <li>ApplicationEventPublisherAware's {@code setApplicationEventPublisher}
+ * <li>7.ApplicationEventPublisherAware's {@code setApplicationEventPublisher}
  * (only applicable when running in an application context)
- * <li>MessageSourceAware's {@code setMessageSource}
+ * <li>8.MessageSourceAware's {@code setMessageSource}
  * (only applicable when running in an application context)
- * <li>ApplicationContextAware's {@code setApplicationContext}
+ * <li>9.ApplicationContextAware's {@code setApplicationContext}
  * (only applicable when running in an application context)
- * <li>ServletContextAware's {@code setServletContext}
+ * <li>10.ServletContextAware's {@code setServletContext}
  * (only applicable when running in a web application context)
- * <li>{@code postProcessBeforeInitialization} methods of BeanPostProcessors
- * <li>InitializingBean's {@code afterPropertiesSet}
- * <li>a custom init-method definition
- * <li>{@code postProcessAfterInitialization} methods of BeanPostProcessors
+ * <li>11.{@code postProcessBeforeInitialization} methods of BeanPostProcessors
+ * <li>12.InitializingBean's {@code afterPropertiesSet}
+ * <li>13.a custom init-method definition
+ * <li>14.{@code postProcessAfterInitialization} methods of BeanPostProcessors
  * </ol>
+ * BEAN 初始化顺序的全套顺序，以及他们的生成标准是：
+ * 1.BEAN 设置名称 为前缀+beanName
+ * 2.设置BEAN的类加载器 通过名称获取类名
+ * 3.设置BEAN的beanFactory  调用在bean的属性值注入之后 在 {@link InitializingBean#afterPropertiesSet()} 调用之前
+ * 4.设置BEAN的{@link Environment} 从而能被notify
+ * 5.嵌套定义值解析  被唤醒与设置值
+ * 看 ：
+ * @see org.springframework.beans.factory.config.ConfigurableBeanFactory#resolveEmbeddedValue(String)
+ * @see org.springframework.beans.factory.config.ConfigurableBeanFactory#getBeanExpressionResolver()
+ * @see org.springframework.beans.factory.config.EmbeddedValueResolver
+ *
  *
  * <p>On shutdown of a bean factory, the following lifecycle methods apply:
  * <ol>

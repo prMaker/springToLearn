@@ -20,10 +20,13 @@ package org.springframework.beans.factory;
  * Callback that allows a bean to be aware of the bean
  * {@link ClassLoader class loader}; that is, the class loader used by the
  * present bean factory to load bean classes.
+ * 让一个bean知道BEAN的类加载器的回调，是用当前的bean工厂加载bean实例
  *
  * <p>This is mainly intended to be implemented by framework classes which
  * have to pick up application classes by name despite themselves potentially
  * being loaded from a shared class loader.
+ * 这主要通过框架类来实现，必须通过名称来拾取应用类，尽管他们可能从共享类加载器加载
+ * despite 尽管  potentially 可能 adv
  *
  * <p>For a list of all bean lifecycle methods, see the
  * {@link BeanFactory BeanFactory javadocs}.

@@ -5,6 +5,7 @@ platform. A key element of Spring is infrastructural support at the application
 level: Spring focuses on the "plumbing" of enterprise applications so that teams
 can focus on application-level business logic, without unnecessary ties to
 specific deployment environments.
+<!-- comprehensive 全面的  enterprise 企业级 infrastructural 基础层面 -->
 
 The framework also serves as the foundation for [Spring Integration][], [Spring Batch][]
 and the rest of the Spring [family of projects][]. Browse the repositories under

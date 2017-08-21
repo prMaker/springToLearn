@@ -95,6 +95,8 @@ public interface PropertyResolver {
 	 * @throws IllegalArgumentException if given text is {@code null}
 	 * @see #resolveRequiredPlaceholders
 	 * @see org.springframework.util.SystemPropertyUtils#resolvePlaceholders(String)
+	 *
+	 * 解析${} 注解型内容注释
 	 */
 	String resolvePlaceholders(String text);
 
